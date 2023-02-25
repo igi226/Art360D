@@ -480,6 +480,7 @@ var cropImageButton = document.getElementById('cropImageBtn');
     @yield('showDivUserType')
     @yield('frame_details')
     @yield('artWorkIndex')
+    @yield('slideImage')
     <script>
         $('.show_confirm').click(function(event) {
         

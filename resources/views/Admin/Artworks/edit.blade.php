@@ -390,18 +390,19 @@
                                                 <div class="col-lg-9">
                                                     <div id="contentDiv">
                                                         @foreach ($artwork->artwork_images as $image)
-                                                        <div class="artworkimg">
-                                                            <img class="m-2"
-                                                                src="{{ asset('storage/ArtworkImage/' . $image->image) }}"
-                                                                alt="">
-                                                            <button type="button"
-                                                                onclick="deleteSingleArtworkImg({{ $image->id }})"
-                                                                class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                                        </div>
-                                                    @endforeach
+                                                            <div class="artworkimg">
+                                                                <img class="m-2"
+                                                                    src="{{ asset('storage/ArtworkImage/' . $image->image) }}"
+                                                                    alt="">
+                                                                <button type="button"
+                                                                    onclick="deleteSingleArtworkImg({{ $image->id }})"
+                                                                    class="btn btn-sm"><i
+                                                                        class="fa fa-times"></i></button>
+                                                            </div>
+                                                        @endforeach
                                                     </div>
 
-                                                    
+
 
 
                                                 </div>
@@ -454,9 +455,11 @@
                                                     id="material_id">
                                                     <option value="">Select artist</option>
                                                     @foreach ($materials as $material)
-                                                   <option {{ $artwork->material_id == $material->id ? 'selected' : '' }} value="{{ $material->id }}">{{ $material->name }}
-                                                   </option>
-                                               @endforeach
+                                                        <option
+                                                            {{ $artwork->material_id == $material->id ? 'selected' : '' }}
+                                                            value="{{ $material->id }}">{{ $material->name }}
+                                                        </option>
+                                                    @endforeach
                                                     <option value="0">other</option>
 
 
@@ -528,6 +531,7 @@
                                         </div>
 
                                     </div>
+                                    {{-- {{ dd(count($artwork->artwork_frames) > 0 ? 'yes' : 'no') }} --}}
 
                                     <div class="form-group mb-3">
                                         <div class="row align-items-center">
@@ -535,20 +539,101 @@
                                                     class="text-danger">*</span>Does it has frame?</label>
                                             <div class="col-lg-9">
                                                 <select id="has-frame" class="form-control font-size-13 custom-shadow">
-                                                    <option value="">select</option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option {{ count($artwork->artwork_frames) > 0 ? 'selected' : '' }}
+                                                        value="yes">Yes</option>
+                                                    <option {{ count($artwork->artwork_frames) <= 0 ? 'selected' : '' }}
+                                                        value="no">No</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div id="frame-no">
+                                        @if (count($artwork->artwork_frames) > 0)
+                                            <div class="form-group mb-3">
+                                                <div class="row align-items-center"><label
+                                                        class="col-lg-3 fw-bold font-size-13">Number of Frame:</label>
+                                                    <div class="col-lg-9">
+                                                        <select name="number_of_frame"
+                                                            class="form-control font-size-13 custom-shadow"
+                                                            id="frame-Details" onchange="frameDetails(this.value)">
+                                                            <option {{ $artwork->number_of_frame == 1 ? 'select' : '' }}
+                                                                value="1">1</option>
+                                                            <option {{ $artwork->number_of_frame == 2 ? 'select' : '' }}
+                                                                value="2">2</option>
+                                                            <option {{ $artwork->number_of_frame == 3 ? 'select' : '' }}
+                                                                value="3">3</option>
+                                                            <option {{ $artwork->number_of_frame == 4 ? 'select' : '' }}
+                                                                value="4">4</option>
+                                                            <select>
 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                    </div>
+
+                                    <div>
+                                        @if (count($artwork->artwork_frames) > 0)
+                                            @foreach ($artwork->artwork_frames as $frame)
+                                            @php
+                                                 $i = 1
+                                            @endphp 
+                                                <div class="form-group mb-3">
+                                                    <div class="row align-items-center"><label
+                                                            class="col-lg-3 fw-bold font-size-13">Frame{{ $i }} details:</label>
+                                                        <div class="col-lg-9">
+                                                            <div class="row">
+                                                                <div class="col-md-4"><input
+                                                                        name="frameDetails[{{ $i }}][frame_type]"
+                                                                        placeholder="frame type"
+                                                                        class="form-control font-size-13 custom-shadow" value="{{ $frame->frame_type }}">
+                                                                </div>
+                                                                <div class="col-md-4"><input type="color"
+                                                                        name="frameDetails[{{ $i }}][frame_color]"
+                                                                        class="form-control font-size-13 custom-shadow" value="{{ $frame->frame_color }}">
+                                                                </div>
+                                                                <div class="col-md-4"><input
+                                                                        name="frameDetails[{{ $i }}][frame_price]"
+                                                                        placeholder="frame price"
+                                                                        class="form-control font-size-13 custom-shadow" value="{{ $frame->frame_price }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               @php
+                                                     $i++;
+                                               @endphp 
+                                                {{-- <div class="form-group mb-3">
+                                                    <div class="row align-items-center"><label
+                                                            class="col-lg-3 fw-bold font-size-13">Frame details:</label>
+                                                        <div class="col-lg-9">
+                                                            <div class="row">
+                                                                <div class="col-md-4"><input
+                                                                        name="frameDetails[2][frame_type]"
+                                                                        placeholder="frame type"
+                                                                        class="form-control font-size-13 custom-shadow">
+                                                                </div>
+                                                                <div class="col-md-4"> <input type="color"
+                                                                        name="frameDetails[2][frame_color]"
+                                                                        class="form-control font-size-13 custom-shadow">
+                                                                </div>
+                                                                <div class="col-md-4"><input
+                                                                        name="frameDetails[2][frame_price]"
+                                                                        placeholder="frame price"
+                                                                        class="form-control font-size-13 custom-shadow">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+                                            @endforeach
+                                        @endif
 
                                     </div>
 
                                     <div id="frame-details-field">
-
 
                                     </div>
 
@@ -557,7 +642,7 @@
                                             <label class="col-lg-3 fw-bold font-size-13"><span
                                                     class="text-danger">*</span> Art Price:</label>
                                             <div class="col-lg-9">
-                                                <input type="text" value="{{ old('price') }}"
+                                                <input type="text" value="{{ $artwork->price }}"
                                                     class="form-control font-size-13 custom-shadow" name="price">
                                                 @if ($errors->has('price'))
                                                     <span class="text-danger">{{ $errors->first('price') }}</span>
@@ -573,11 +658,10 @@
 
                                                 <select name="movement_id"
                                                     class="form-control font-size-13 custom-shadow">
-                                                    <option value="">Select artist</option>
-                                                    {{-- @foreach ($movements as $movement)
-                                                   <option value="{{ $movement->id }}">{{ $movement->name }}
-                                                   </option>
-                                               @endforeach --}}
+                                                    @foreach ($movements as $movement)
+                                                        <option {{ $artwork->movement_id == $movement->id ? 'selected' : '' }} value="{{ $movement->id }}">{{ $movement->name }}
+                                                        </option>
+                                                    @endforeach
 
                                                 </select>
                                                 @if ($errors->has('movement_id'))
@@ -591,7 +675,7 @@
                                         <div class="row align-items-center">
                                             <label class="col-lg-3 fw-bold font-size-13"> Markings:</label>
                                             <div class="col-lg-9">
-                                                <input type="text" value="{{ old('markings') }}"
+                                                <input type="text" value="{{ $artwork->markings }}"
                                                     class="form-control font-size-13 custom-shadow"name="markings">
                                                 @if ($errors->has('markings'))
                                                     <span class="text-danger">{{ $errors->first('markings') }}</span>
@@ -604,7 +688,7 @@
                                         <div class="row align-items-center">
                                             <label class="col-lg-3 fw-bold font-size-13"> Exhibitions:</label>
                                             <div class="col-lg-9">
-                                                <input type="text" value="{{ old('exhibitions') }}"
+                                                <input type="text" value="{{ $artwork->exhibitions }}"
                                                     class="form-control font-size-13 custom-shadow"name="exhibitions">
                                                 @if ($errors->has('exhibitions'))
                                                     <span class="text-danger">{{ $errors->first('exhibitions') }}</span>
@@ -620,7 +704,7 @@
                                             <label class="col-lg-3 fw-bold font-size-13"> Prints Available:</label>
                                             <div class="col-lg-9">
                                                 {{-- <input type="text" value={{ old('') }} class="form-control font-size-13 custom-shadow"name="edition"> --}}
-                                                <textarea class="summernote form-control font-size-13 custom-shadow" name="prints_available">{{ old('prints_available') }}</textarea>
+                                                <textarea class="summernote form-control font-size-13 custom-shadow" name="prints_available">{{ $artwork->prints_available }}</textarea>
                                                 @if ($errors->has('prints_available'))
                                                     <span
                                                         class="text-danger">{{ $errors->first('prints_available') }}</span>
@@ -635,7 +719,7 @@
                                                 Conditions:</label>
                                             <div class="col-lg-9">
                                                 {{-- <input type="text" value={{ old('') }} class="form-control font-size-13 custom-shadow"name="edition"> --}}
-                                                <textarea class="summernote form-control font-size-13 custom-shadow" name="also_available_condition">{{ old('also_available_condition') }}</textarea>
+                                                <textarea class="summernote form-control font-size-13 custom-shadow" name="also_available_condition">{{ $artwork->also_available_condition }}</textarea>
                                                 @if ($errors->has('also_available_condition'))
                                                     <span
                                                         class="text-danger">{{ $errors->first('also_available_condition') }}</span>
@@ -650,7 +734,7 @@
                                                 (%):</label>
                                             <div class="col-lg-9">
                                                 <input type="text"
-                                                    value="{{ old('direct_sale_discount_percentage') }}"
+                                                    value="{{ $artwork->direct_sale_discount_percentage }}"
                                                     class="form-control font-size-13 custom-shadow"name="direct_sale_discount_percentage">
                                                 @if ($errors->has('direct_sale_discount_percentage'))
                                                     <span
@@ -664,12 +748,9 @@
                                         <div class="row align-items-center">
                                             <label class="col-lg-3 fw-bold font-size-13"> Discount Start Date:</label>
                                             <div class="col-lg-9">
-                                                <input type="date"
-                                                    class="form-control font-size-13 custom-shadow"name="discount_start_dt"
-                                                    value="{{ old('discount_start_dt') }}">
+                                                <input type="date" class="form-control font-size-13 custom-shadow" name="discount_start_dt" value="{{ $artwork->discount_start_dt }}">
                                                 @if ($errors->has('discount_start_dt'))
-                                                    <span
-                                                        class="text-danger">{{ $errors->first('discount_start_dt') }}</span>
+                                                    <span class="text-danger">{{ $errors->first('discount_start_dt') }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -681,7 +762,7 @@
                                             <div class="col-lg-9">
                                                 <input type="date"
                                                     class="form-control font-size-13 custom-shadow"name="discount_end_dt"
-                                                    value="{{ old('discount_end_dt') }}">
+                                                    value="{{ $artwork->discount_end_dt }}">
                                                 @if ($errors->has('discount_end_dt'))
                                                     <span
                                                         class="text-danger">{{ $errors->first('discount_end_dt') }}</span>
@@ -694,7 +775,7 @@
                                         <div class="row align-items-center">
                                             <label class="col-lg-3 fw-bold font-size-13"> Copyright:</label>
                                             <div class="col-lg-9">
-                                                <input type="text" value="{{ old('copyright') }}"
+                                                <input type="text" value="{{ $artwork->copyright     }}"
                                                     class="form-control font-size-13 custom-shadow"name="copyright">
                                                 @if ($errors->has('copyright'))
                                                     <span class="text-danger">{{ $errors->first('copyright') }}</span>
@@ -710,10 +791,10 @@
                                             <div class="col-lg-9">
                                                 <label for="">Yes</label>
                                                 <input type="radio" class="font-size-13 custom-shadow"
-                                                    name="ready_to_hang" value="yes" checked>
+                                                    name="ready_to_hang" value="yes" {{ $artwork->ready_to_hang == 'yes' ? 'checked' : '' }}>
                                                 <label for="">No</label>
                                                 <input type="radio" class="font-size-13 custom-shadow"
-                                                    name="ready_to_hang" value="no">
+                                                    name="ready_to_hang" value="no" {{ $artwork->ready_to_hang == 'no' ? 'checked': '' }}>
                                                 @if ($errors->has('ready_to_hang'))
                                                     <span class="text-danger">{{ $errors->first('ready_to_hang') }}</span>
                                                 @endif
@@ -728,10 +809,10 @@
                                             <div class="col-lg-9">
                                                 <label for="">Yes</label>
                                                 <input type="radio" class="font-size-13 custom-shadow" name="signed_by"
-                                                    value="yes">
+                                                    value="yes" {{ $artwork->signed_by == 'yes' ? 'checked': '' }}>
                                                 <label for="">No</label>
                                                 <input type="radio" class="font-size-13 custom-shadow" name="signed_by"
-                                                    value="no">
+                                                    value="no" {{ $artwork->signed_by == 'no' ? 'checked': '' }}>
                                                 @if ($errors->has('signed_by'))
                                                     <span class="text-danger">{{ $errors->first('signed_by') }}</span>
                                                 @endif
@@ -744,7 +825,7 @@
                                             <label class="col-lg-3 fw-bold font-size-13">Certification:</label>
                                             <div class="col-lg-9">
                                                 <input type="file" class=" form-control font-size-13 custom-shadow"
-                                                    name="certification" value="{{ old('certification') }}">
+                                                    name="certification" value="{{ $artwork->certification }}">
                                                 @if ($errors->has('certification'))
                                                     <span class="text-danger">{{ $errors->first('certification') }}</span>
                                                 @endif
@@ -889,14 +970,14 @@
 
         function deleteSingleArtworkImg(artwork_image_id) {
             swal({
-                    title: `Are you sure  to delete this image?`,
-                    text: "You are deleting the image for permanent",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
+                title: `Are you sure  to delete this image?`,
+                text: "You are deleting the image for permanent",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
                         type: "DELETE",
                         url: "{{ url('admin/delete-artwork-image') }}",
                         data: {
@@ -906,16 +987,16 @@
                         dataType: "JSON",
                         success: function(response) {
                             swal(response.msg);
-                            
+
                             $('#contentDiv').load(' #contentDiv')
                         }
 
                     });
-                    } else {
-                        swal("Your data file is safe!");
-                    }
+                } else {
+                    swal("Your data file is safe!");
+                }
 
-                });
+            });
         }
     </script>
 

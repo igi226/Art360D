@@ -99,7 +99,8 @@ class ArtworkController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['artwork'] = $this->artworks->getArtwork($id);
+       return view('Admin.artworks.view', $data);
     }
 
     /**
@@ -111,7 +112,7 @@ class ArtworkController extends Controller
     public function edit($id)
     {
         $data['artwork'] = $this->artworks->getArtwork($id);
-        // dd($data['artwork']->artist_id);
+        // dd($data['artwork']->artwork_frames);
         $data['artists'] = DB::table('users')->whereNotIn('id', [$data['artwork']->artist_id])->get();
         // $data['categories'] =  DB::table('artwork_categories')->whereNotIn('id', explode(',',$data['artwork']->category_ids))->get();
         $data['categories'] = $this->categories->getAllCategory();
@@ -132,7 +133,18 @@ class ArtworkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('_token', '_method', 'frameDetails', 'category_ids', 'artwork_type','image');
+        $data['category_ids'] = implode(',',$request->category_ids);
+        $data['artwork_type'] = implode(',',$request->artwork_type);
+
+        $data2 = $request->frameDetails;
+        $dataImage = $request->image;
+        $update = $this->artworks->updateArtwork($data, $data2, $dataImage, $id);
+        if($update) {
+            return redirect()->route('artworks.index')->with('msg', 'Artwork updated successfully');
+        }else{
+            return back()->with('msg', 'Some error occur!');
+        }
     }
 
     /**

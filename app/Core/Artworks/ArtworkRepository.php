@@ -48,13 +48,30 @@ class ArtworkRepository implements ArtworkInterface {
             $image->storeAs("public/ArtworkImage", $content_db);
         }
         return $insert_image;
-
-       
     }
     public function getArtwork( $id ){
       return Artwork::findOrFail($id);  
     }
-    public function updateArtwork( array $data, $slug ){
+    public function updateArtwork( array $data,  $data2, $dataImage, $id ){
+        Artwork::where('id', $id)->update($data);
+        if(!empty($data2)){
+            foreach($data2 as $frameDetail){
+                $slug = Str::slug($frameDetail['frame_type']);
+                $slug_count = DB::table('frames')->where('slug',$slug)->count();
+                if($slug_count>0){
+                    $slug = random_int(100000, 999999).'-'.$slug;
+                }
+                $frameDetail['slug'] = $slug;
+                $frameDetail['artwork_id'] = $id;
+                $frame_insert = DB::table('frames')->insert($frameDetail);
+                // return $frame_insert;
+            }
+            }
+            if(!empty($dataImage)){
+                return $this->imageUpload($dataImage, $id);
+            }
+            return true;
+    
         
     }
     public function deleteArtwork( $slug ){

@@ -1,0 +1,13 @@
+@media(min-width:1350px){
+	.container{
+		max-width: 1250px;
+	}
+}
+@media(max-width:1199px){
+	.img-menu-action:hover span, .main-menu .menu-list-item.active .nav-link, .main-menu .menu-list-item:hover .nav-link, .main-menu .nav-text-sub:hover{
+	color:#000;
+	}
+	.nav-link{
+		color: #000;
+	}
+}

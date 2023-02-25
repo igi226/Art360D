@@ -22,5 +22,9 @@ class Artwork extends Model
         return $this->belongsTo(User::class, 'artist_id', 'id');
     }
 
+    public function artwork_frames(){
+        return $this->hasMany(Frame::class, 'artwork_id', 'id');
+    }
+
     
 }

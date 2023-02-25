@@ -64,7 +64,8 @@
                                                         <a href="{{ route('artworks.edit', $artwork->id) }}" class="btn btn-outline-primary btn-xs">
                                                             <i class="fas fa-pen"></i>
                                                         </a>
-                                                        <a href="{{ route("artworks.show", $artwork->id) }}" class="btn btn-outline-success btn-xs">
+                                                        <a href="#" class="btn btn-outline-success btn-xs">
+                                                            {{-- {{ route("artworks.show", $artwork->id) }} --}}
                                                             <i class="far fa-eye"></i>
                                                         </a>
                                                         <form action="#" {{-- {{ route('artworks-subjects.destroy', $artwork->id) }} --}} class="action-icon">
