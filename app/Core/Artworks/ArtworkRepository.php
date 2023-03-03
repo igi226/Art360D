@@ -87,11 +87,23 @@ class ArtworkRepository implements ArtworkInterface {
         }
     }
 
+    public function fearutedProduct( $id ){
+        // dd($id);
+        $artwork = Artwork::findOrFail($id);
+        if($artwork->featured == 0){
+            return $artwork->update(['featured' => 1]);
+        }else{
+            return $artwork->update(['featured' => 0]);
+        }
+    }
+
     public function deleteArtwork_image( $id ) {
         $delete = ArtworkImage::findOrFail($id);
         File::delete("storage/ArtworkImage/" . $delete->image);
         return $delete->delete();
 
     }
+
+    
 }
 

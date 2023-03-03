@@ -269,6 +269,17 @@
 
                             </ul>
                         </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-layout-3-line"></i>
+                                <span>Cms management</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="{{ route('cms.index') }}">Home page cms</a></li>
+                                <li><a href="{{ route('cms.create') }}">Add cms</a></li>
+                            </ul>
+                        </li>
                         
 
                         

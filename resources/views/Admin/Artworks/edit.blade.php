@@ -460,8 +460,8 @@
                                                             value="{{ $material->id }}">{{ $material->name }}
                                                         </option>
                                                     @endforeach
-                                                    <option value="0">other</option>
-
+                                                    <option {{ $artwork->material_id == 0 ? 'selected' : '' }} value="0">other</option>
+                                                    
 
                                                 </select>
                                                 @if ($errors->has('material_id'))
@@ -472,7 +472,17 @@
                                     </div>
 
                                     <div id="other-material">
-
+                                        @if ($artwork->material_id == 0 )
+                                        <div class="form-group mb-3">
+                                            <div class="row align-items-center"><label
+                                                    class="col-lg-3 fw-bold font-size-13"></label>
+                                                <div class="col-lg-9">
+                                                    <input value="{{ $artwork->material_other }}" type="text" class="form-control font-size-13 custom-shadow" placeholder="Please enter material" name="material_other">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -576,35 +586,39 @@
                                     <div>
                                         @if (count($artwork->artwork_frames) > 0)
                                             @foreach ($artwork->artwork_frames as $frame)
-                                            @php
-                                                 $i = 1
-                                            @endphp 
+                                                @php
+                                                    $i = 1;
+                                                @endphp
                                                 <div class="form-group mb-3">
                                                     <div class="row align-items-center"><label
-                                                            class="col-lg-3 fw-bold font-size-13">Frame{{ $i }} details:</label>
+                                                            class="col-lg-3 fw-bold font-size-13">Frame{{ $i }}
+                                                            details:</label>
                                                         <div class="col-lg-9">
                                                             <div class="row">
                                                                 <div class="col-md-4"><input
                                                                         name="frameDetails[{{ $i }}][frame_type]"
                                                                         placeholder="frame type"
-                                                                        class="form-control font-size-13 custom-shadow" value="{{ $frame->frame_type }}">
+                                                                        class="form-control font-size-13 custom-shadow"
+                                                                        value="{{ $frame->frame_type }}">
                                                                 </div>
                                                                 <div class="col-md-4"><input type="color"
                                                                         name="frameDetails[{{ $i }}][frame_color]"
-                                                                        class="form-control font-size-13 custom-shadow" value="{{ $frame->frame_color }}">
+                                                                        class="form-control font-size-13 custom-shadow"
+                                                                        value="{{ $frame->frame_color }}">
                                                                 </div>
                                                                 <div class="col-md-4"><input
                                                                         name="frameDetails[{{ $i }}][frame_price]"
                                                                         placeholder="frame price"
-                                                                        class="form-control font-size-13 custom-shadow" value="{{ $frame->frame_price }}">
+                                                                        class="form-control font-size-13 custom-shadow"
+                                                                        value="{{ $frame->frame_price }}">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                               @php
-                                                     $i++;
-                                               @endphp 
+                                                @php
+                                                    $i++;
+                                                @endphp
                                                 {{-- <div class="form-group mb-3">
                                                     <div class="row align-items-center"><label
                                                             class="col-lg-3 fw-bold font-size-13">Frame details:</label>
@@ -659,7 +673,9 @@
                                                 <select name="movement_id"
                                                     class="form-control font-size-13 custom-shadow">
                                                     @foreach ($movements as $movement)
-                                                        <option {{ $artwork->movement_id == $movement->id ? 'selected' : '' }} value="{{ $movement->id }}">{{ $movement->name }}
+                                                        <option
+                                                            {{ $artwork->movement_id == $movement->id ? 'selected' : '' }}
+                                                            value="{{ $movement->id }}">{{ $movement->name }}
                                                         </option>
                                                     @endforeach
 
@@ -748,9 +764,11 @@
                                         <div class="row align-items-center">
                                             <label class="col-lg-3 fw-bold font-size-13"> Discount Start Date:</label>
                                             <div class="col-lg-9">
-                                                <input type="date" class="form-control font-size-13 custom-shadow" name="discount_start_dt" value="{{ $artwork->discount_start_dt }}">
+                                                <input type="date" class="form-control font-size-13 custom-shadow"
+                                                    name="discount_start_dt" value="{{ $artwork->discount_start_dt }}">
                                                 @if ($errors->has('discount_start_dt'))
-                                                    <span class="text-danger">{{ $errors->first('discount_start_dt') }}</span>
+                                                    <span
+                                                        class="text-danger">{{ $errors->first('discount_start_dt') }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -775,7 +793,7 @@
                                         <div class="row align-items-center">
                                             <label class="col-lg-3 fw-bold font-size-13"> Copyright:</label>
                                             <div class="col-lg-9">
-                                                <input type="text" value="{{ $artwork->copyright     }}"
+                                                <input type="text" value="{{ $artwork->copyright }}"
                                                     class="form-control font-size-13 custom-shadow"name="copyright">
                                                 @if ($errors->has('copyright'))
                                                     <span class="text-danger">{{ $errors->first('copyright') }}</span>
@@ -791,12 +809,15 @@
                                             <div class="col-lg-9">
                                                 <label for="">Yes</label>
                                                 <input type="radio" class="font-size-13 custom-shadow"
-                                                    name="ready_to_hang" value="yes" {{ $artwork->ready_to_hang == 'yes' ? 'checked' : '' }}>
+                                                    name="ready_to_hang" value="yes"
+                                                    {{ $artwork->ready_to_hang == 'yes' ? 'checked' : '' }}>
                                                 <label for="">No</label>
                                                 <input type="radio" class="font-size-13 custom-shadow"
-                                                    name="ready_to_hang" value="no" {{ $artwork->ready_to_hang == 'no' ? 'checked': '' }}>
+                                                    name="ready_to_hang" value="no"
+                                                    {{ $artwork->ready_to_hang == 'no' ? 'checked' : '' }}>
                                                 @if ($errors->has('ready_to_hang'))
-                                                    <span class="text-danger">{{ $errors->first('ready_to_hang') }}</span>
+                                                    <span
+                                                        class="text-danger">{{ $errors->first('ready_to_hang') }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -809,10 +830,10 @@
                                             <div class="col-lg-9">
                                                 <label for="">Yes</label>
                                                 <input type="radio" class="font-size-13 custom-shadow" name="signed_by"
-                                                    value="yes" {{ $artwork->signed_by == 'yes' ? 'checked': '' }}>
+                                                    value="yes" {{ $artwork->signed_by == 'yes' ? 'checked' : '' }}>
                                                 <label for="">No</label>
                                                 <input type="radio" class="font-size-13 custom-shadow" name="signed_by"
-                                                    value="no" {{ $artwork->signed_by == 'no' ? 'checked': '' }}>
+                                                    value="no" {{ $artwork->signed_by == 'no' ? 'checked' : '' }}>
                                                 @if ($errors->has('signed_by'))
                                                     <span class="text-danger">{{ $errors->first('signed_by') }}</span>
                                                 @endif
@@ -827,7 +848,8 @@
                                                 <input type="file" class=" form-control font-size-13 custom-shadow"
                                                     name="certification" value="{{ $artwork->certification }}">
                                                 @if ($errors->has('certification'))
-                                                    <span class="text-danger">{{ $errors->first('certification') }}</span>
+                                                    <span
+                                                        class="text-danger">{{ $errors->first('certification') }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -943,7 +965,7 @@
                 // alert(demovalue);
                 if (demovalue == "0") {
                     var otherSubject =
-                        '<div class="form-group mb-3"><div class="row align-items-center"><label class="col-lg-3 fw-bold font-size-13"></label><div class="col-lg-9"><input type="text" class="form-control font-size-13 custom-shadow" placeholder="Please enter material" name="material_other"></div></div></div>';
+                        '<div class="form-group mb-3"><div class="row align-items-center"><label class="col-lg-3 fw-bold font-size-13"></label><div class="col-lg-9"><input value="{{ $artwork->material_other }}" type="text" class="form-control font-size-13 custom-shadow" placeholder="Please enter material" name="material_other"></div></div></div>';
                 } else {
                     var otherSubject = '';
                 }

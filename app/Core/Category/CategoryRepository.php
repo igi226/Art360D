@@ -12,6 +12,9 @@ class CategoryRepository implements CategoryInterface {
         return ArtworkCategory::where("slug", $slug)->firstOrFail();
     }
     public function storeCategory(array $data){
+        if(!empty($data['image'])){
+            $data["image"] = $this->imageUpload($data["image"]);
+        }
         $data["created_at"] = date("Y-m-d");
         // dd($data);
         $slug = Str::slug($data['name']);
@@ -22,8 +25,18 @@ class CategoryRepository implements CategoryInterface {
         $data['slug'] = $slug;
         return DB::table("artwork_categories")->insert($data);
     }
+    public function imageUpload($image){
+        $content_db = time() . rand(0000, 9999) . "." . $image->getClientOriginalExtension();
+        $image->storeAs("public/categoryImage", $content_db);
+        return $content_db;
+    }
+
     public function updateCategory(array $data, $slug){
+        if(!empty($data['image'])){
+            $data["image"] = $this->imageUpload($data["image"]);
+        }
         $data["updated_at"] = date("Y-m-d");
+        
         return ArtworkCategory::where("slug", $slug)->update($data);
     }
     public function deleteCategory($slug){

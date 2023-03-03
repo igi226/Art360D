@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ArtworkCategory extends Model
+class Cms extends Model
 {
     use HasFactory;
-     protected $fillable = [
-        'image', 'name', 'updated_at'
-     ];
 }

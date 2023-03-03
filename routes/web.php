@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Artist\ArtistController;
 use App\Http\Controllers\Admin\Artwork\ArtworkController;
 use App\Http\Controllers\Admin\ArtworkSubjectController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\Cms\CmsController;
 use App\Http\Controllers\Admin\Collections\CollectionController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Material\MaterialController;
@@ -52,8 +53,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'],function(){
     Route::resource('artwork-category', ArtworkCategoryController::class);
     Route::resource('artworks', ArtworkController::class);
     Route::post('artworks/put-on-off-market', [ArtworkController::class, 'putOnOffMarket'])->name('artworks.putOnOffMarket');
+    Route::post('artworks/fearuted-product', [ArtworkController::class, 'fearutedProduct'])->name('artworks.fearutedProduct');
+    
     Route::delete('delete-artwork-image', [ArtworkController::class, 'deleteArtworkImage']);
-
+    Route::resource('cms', CmsController::class);
+    Route::get('cms-home-page', [CmsController::class, 'cmsHomepage'])->name('admin.cmsHomepage');
+    Route::get('cms-about-page', [CmsController::class, 'cmsAboutpage'])->name('admin.cmsAboutpage');
     
     Route::get('log-out', [AuthController::class, 'adminLogout'])->name('admin.logout');
 

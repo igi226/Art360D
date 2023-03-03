@@ -21,6 +21,7 @@
                                                 <th>Created at</th>
 
                                                 <th>Estimated value</th>
+                                                <th>Feature Product</th>
                                                 <th width="80">On/Off Market</th>
                                                 <th width="80">Action</th>
                                             </tr>
@@ -52,8 +53,18 @@
                                                     <td><span class="fw-bold text-primary">{{ $artwork->created_at }}</span>
                                                     </td>
                                                     <td><span class="fw-bold text-primary">{{ $artwork->price }}</span></td>
+
+                                                    <td><span id="feature-button{{ $artwork->id }}" class="fw-bold">
+                                                            <button onclick="featuredProduct({{ $artwork->id }})"
+                                                                class="btn btn-sm {{ $artwork->featured == 0 ? 'btn-danger' : 'btn-primary' }}"
+                                                                type="button">{{ $artwork->featured == 1 ? 'Featured' : 'Non Featured' }}
+                                                            </button>
+                                                        </span>
+                                                    </td>
+
                                                     <td><span id="market-button{{ $artwork->id }}" class="fw-bold">
-                                                            <button onclick="putOnOffMarket({{ $artwork->id }})" class="btn btn-sm {{ $artwork->on_market == 0 ? 'btn-danger' : 'btn-success' }}"
+                                                            <button onclick="putOnOffMarket({{ $artwork->id }})"
+                                                                class="btn btn-sm {{ $artwork->on_market == 0 ? 'btn-danger' : 'btn-success' }}"
                                                                 type="button">{{ $artwork->on_market == 0 ? 'Off market' : 'On market' }}
                                                             </button>
                                                         </span>
@@ -61,11 +72,13 @@
 
 
                                                     <td>
-                                                        <a href="{{ route('artworks.edit', $artwork->id) }}" class="btn btn-outline-primary btn-xs">
+                                                        <a href="{{ route('artworks.edit', $artwork->id) }}"
+                                                            class="btn btn-outline-primary btn-xs">
                                                             <i class="fas fa-pen"></i>
                                                         </a>
-                                                        <a href="#" class="btn btn-outline-success btn-xs">
-                                                            {{-- {{ route("artworks.show", $artwork->id) }} --}}
+                                                        <a href="{{ route('artworks.show', $artwork->id) }}"
+                                                            class="btn btn-outline-success btn-xs">
+                                                            {{--  --}}
                                                             <i class="far fa-eye"></i>
                                                         </a>
                                                         <form action="#" {{-- {{ route('artworks-subjects.destroy', $artwork->id) }} --}} class="action-icon">
@@ -101,10 +114,8 @@
 
     <script>
         function putOnOffMarket(artwork_id) {
-            
             swal({
-                title: 'You are cganging the status, press Ok to confirm.',
-                // text: "If you delete this, it will be gone forever.",
+                title: 'You are changing the status, press Ok to confirm.',
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -121,7 +132,37 @@
                         dataType: "JSON",
                         success: function(response) {
                             swal(response.msg);
-                            $("#market-button"+ artwork_id).load(window.location.href + " #market-button"+ artwork_id);
+                            $("#market-button" + artwork_id).load(window.location.href +
+                                " #market-button" + artwork_id);
+                        }
+
+                    });
+                } else if (result.isDenied) {
+                    swal('Market status is not changed', '', 'info')
+                }
+            });
+        }
+
+        function featuredProduct(artwork_id) {
+            swal({
+                title: 'You are puting it as featured product, press Ok to confirm.',
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                showCancelButton: true,
+            }).then((result) => {
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('admin/artworks/fearuted-product') }}",
+                        data: {
+                            'id': artwork_id,
+                            '_token': '{{ csrf_token() }}'
+                        },
+                        dataType: "JSON",
+                        success: function(response) {
+                            swal(response.msg);
+                            $("#feature-button" + artwork_id).load(window.location.href +" #feature-button" + artwork_id);
                         }
 
                     });

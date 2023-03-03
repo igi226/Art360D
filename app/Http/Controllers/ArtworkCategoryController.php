@@ -29,7 +29,7 @@ class ArtworkCategoryController extends Controller
         $request->validate([
             "name" => "required|string"
         ]);
-        $data = $request->only("name");
+        $data = $request->only("name", "image");
         if($this->category->storeCategory($data)){
             return redirect()->route("artwork-category.index")->with("msg", "Category inserted successfully.");
         }else{
@@ -53,7 +53,7 @@ class ArtworkCategoryController extends Controller
         $request->validate([
             "name" => "required|string"
         ]);
-        $data = $request->only("name");
+        $data = $request->only("name", "image");
         if($this->category->updateCategory($data, $slug)){
             return redirect()->route("artwork-category.index")->with("msg", "Category updated successfully.");
         }else{

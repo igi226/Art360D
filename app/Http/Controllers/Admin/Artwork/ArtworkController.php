@@ -53,11 +53,7 @@ class ArtworkController extends Controller
        return view("Admin.Artworks.index", $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         $data = [
@@ -91,24 +87,13 @@ class ArtworkController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $data['artwork'] = $this->artworks->getArtwork($id);
        return view('Admin.artworks.view', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $data['artwork'] = $this->artworks->getArtwork($id);
@@ -124,13 +109,6 @@ class ArtworkController extends Controller
         return view('Admin.Artworks.edit', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $data = $request->except('_token', '_method', 'frameDetails', 'category_ids', 'artwork_type','image');
@@ -147,12 +125,6 @@ class ArtworkController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
@@ -170,6 +142,21 @@ class ArtworkController extends Controller
         }
         
     }
+
+    public function fearutedProduct( Request $request ) {
+        if($this->artworks->fearutedProduct($request->id)){
+            return response()->json([
+                'msg' => 'This artwork is added to featured product.'
+            ]);
+        }else {
+            return response()->json([
+                'msg' => 'Some error occur, try again'
+            ]);
+        }
+        
+    }
+
+    
 
     public function deleteArtworkImage( Request $request) {
         if($this->artworks->deleteArtwork_image($request->id)){

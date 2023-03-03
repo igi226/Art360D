@@ -43,7 +43,7 @@
                     <div class="col-lg-6 ">
                         <div class="announcement-meta-wrapper d-flex align-items-center justify-content-end">
                             <div class="announcement-meta d-flex align-items-center">
-                                <a class="announcement-login announcement-text text-white" href="login.html">
+                                <a class="announcement-login announcement-text text-white" href="#">
                                     <i class="far fa-user"></i>
                                     <span>Login</span>
                                 </a>
@@ -87,7 +87,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-4 col-4">
                             <div class="header-logo">
-                                <a href="index.html" class="logo-main">
+                                <a href="{{ route('index') }}" class="logo-main">
                                     <img src="{{ asset('User/assets/img/logo.png') }}" loading="lazy" alt="bisum">
                                 </a>
                             </div>
@@ -97,7 +97,7 @@
                                 <ul class="main-menu list-unstyled justify-content-center">
                                     <li class="menu-list-item nav-item has-dropdown active">
                                         <div class="mega-menu-header">
-                                            <a class="nav-link" href="index.html">
+                                            <a class="nav-link" href="{{ route('user.artist') }}">
                                                 Artist
                                             </a>
                                         </div>

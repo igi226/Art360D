@@ -21,7 +21,8 @@
   
           <div class="card custom-shadow rounded-lg border">
               <div class="card-body">
-                <form action="{{ route("artwork-category.update", $category->slug) }}" method="POST">
+                <form action="{{ route("artwork-category.update", $category->slug) }}" method="POST" enctype="multipart/form-data">
+                  
                     @csrf
                     @method("PUT")
                    <div class="row">
@@ -40,7 +41,31 @@
                                      @endif
                                   </div>
                                </div>
-                            </div>
+                            </div><br>
+
+                            <div class="form-group mb-3">
+                              <div class="row align-items-center">
+                                  <label class="col-lg-3 fw-bold font-size-13">Old Image:</label>
+                                  <div class="col-lg-6">
+                                      @if (isset($category->image) && !empty($category->image && File::exists(public_path('storage/categoryImage/' . $category->image))))
+                                          <img src="{{ asset('storage/categoryImage/'. $category->image) }}" alt="">
+                                      @else
+                                      <img src="{{ asset('noimg.png') }}" alt="">
+                                      @endif
+                                  </div>
+                              </div>
+<br>
+                            <div class="form-group mb-3">
+                              <div class="row align-items-center">
+                                  <label class="col-lg-3 fw-bold font-size-13">Image:</label>
+                                  <div class="col-lg-6">
+                                      <input type="file" class="form-control font-size-13 custom-shadow"
+                                          name="image">
+                                      @if ($errors->has('image'))
+                                          <span class="text-danger">{{ $errors->first('image') }}</span>
+                                      @endif
+                                  </div>
+                              </div><br>
                             
                              
                             

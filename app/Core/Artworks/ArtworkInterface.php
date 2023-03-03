@@ -8,5 +8,7 @@ interface ArtworkInterface {
     public function updateArtwork( array $data, $data2, $dataImage, $slug );
     public function deleteArtwork( $slug );
     public function putOnOffMarket( $id );
+    public function fearutedProduct( $id );
+    
     public function deleteArtwork_image( $id );
 }

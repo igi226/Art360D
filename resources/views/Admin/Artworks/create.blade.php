@@ -371,10 +371,7 @@
                                                     </div>
 
                                                     <div class="col-md-4">
-                                                        <input type="text" value="{{ old('depth') }}"
-                                                            placeholder="Depth"
-                                                            class="form-control font-size-13 custom-shadow"
-                                                            name="depth">
+                                                        <input type="text" value="{{ old('depth') }}" placeholder="Depth" class="form-control font-size-13 custom-shadow" name="depth">
                                                         @if ($errors->has('depth'))
                                                             <span class="text-danger">{{ $errors->first('depth') }}</span>
                                                         @endif
@@ -437,7 +434,7 @@
 
                                                 </select>
                                                 @if ($errors->has('movement_id'))
-                                                    <span class="text-danger">{{ 'material name is required' }}</span>
+                                                    <span class="text-danger">{{ 'Movement name is required' }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -487,7 +484,7 @@
 
                                     <div class="form-group mb-3">
                                         <div class="row align-items-center">
-                                            <label class="col-lg-3 fw-bold font-size-13"> Also Available:
+                                            <label class="col-lg-3 fw-bold font-size-13"> Also Available
                                                 Conditions:</label>
                                             <div class="col-lg-9">
                                                 {{-- <input type="text" value={{ old('') }} class="form-control font-size-13 custom-shadow"name="edition"> --}}
