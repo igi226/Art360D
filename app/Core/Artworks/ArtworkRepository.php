@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class ArtworkRepository implements ArtworkInterface {
 
     public function getAllArtworks(){
-        return Artwork::orderBy('id','desc')->get();
+        return Artwork::with('artistUsers')->inRandomOrder()->get();
     }
     public function storeArtwork( array $data, $data2, $dataImage ){
         // dd($dataImage);
@@ -102,6 +102,10 @@ class ArtworkRepository implements ArtworkInterface {
         File::delete("storage/ArtworkImage/" . $delete->image);
         return $delete->delete();
 
+    }
+
+    public function getfearutedProducts() {
+        return Artwork::where('featured', 1)->get();
     }
 
     

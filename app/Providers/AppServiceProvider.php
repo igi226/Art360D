@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Core\Artists\ArtistInterface; use App\Core\Artists\ArtistRepository;
 use App\Core\Artworks\ArtworkInterface; use App\Core\Artworks\ArtworkRepository;
 use App\Core\ArtworkSubject\ArtworkSubjectInterface; use App\Core\ArtworkSubject\ArtworkSubjectRepository;
+use App\Core\Blog\BlogInterface; use App\Core\Blog\BlogRepository;
 use App\Core\Category\CategoryInterface; use App\Core\Category\CategoryRepository;
 use App\Core\Cms\CmsInterface; use App\Core\Cms\CmsRepository;
 use App\Core\Collection\CollectionInterface; use App\Core\Collection\CollectionRepository;
@@ -27,10 +28,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(ArtworkInterface::class, ArtworkRepository::class);
         $this->app->bind(CmsInterface::class, CmsRepository::class);
+        $this->app->bind(BlogInterface::class, BlogRepository::class);
     }
     public function boot()
     {
-        //
+       
     }
 }
 ?>

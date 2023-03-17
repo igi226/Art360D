@@ -19,56 +19,87 @@
             }
         ]
     }'>
+
             <div class="slide-item slide-item-bag position-relative">
-                <img class="slide-img d-none d-md-block" src="{{ asset('User/assets/img/slide1.jpg') }}" alt="slide-1">
-                <img class="slide-img d-md-none" src="{{ asset('User/assets/img/slide1.jpg') }}" alt="slide-1">
+                @if (isset($banner1->image) &&
+                        !empty($banner1->image && File::exists(public_path('storage/CmsImage/' . $banner1->image))))
+                    <img class="slide-img d-none d-md-block" src="{{ asset('storage/CmsImage/' . $banner1->image) }}"
+                        alt="slide-1">
+                    <img class="slide-img d-md-none" src="{{ asset('storage/CmsImage/' . $banner1->image) }}" alt="slide-1">
+                @else
+                    <img class="slide-img d-none d-md-block" src="{{ asset('User/assets/img/slide1.jpg') }}" alt="slide-1">
+                    <img class="slide-img d-md-none" src="{{ asset('User/assets/img/slide1.jpg') }}" alt="slide-1">
+                @endif
+
                 <div class="content-absolute content-slide">
                     <div class="container height-inherit d-flex align-items-center justify-content-center">
                         <div class="content-box slide-content slide-content-1 py-4 text-center">
                             <h2 class="slide-heading heading_72 animate__animated animate__fadeInUp"
                                 data-animation="animate__animated animate__fadeInUp">
-                                Gallery
+                                <a class="text-white" href="{{ $banner1->short_desc }}">{{ $banner1->title }}</a>
                             </h2>
-                            <p class="slide-subheading heading_24 animate__animated animate__fadeInUp"
+                            <div class="slide-subheading heading_24 animate__animated animate__fadeInUp"
                                 data-animation="animate__animated animate__fadeInUp">
-                                Gallery shows
-                            </p>
+                                <?php echo html_entity_decode($banner1->description); ?>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="slide-item slide-item-bag position-relative">
-                <img class="slide-img d-none d-md-block" src="{{ asset('User/assets/img/slide2.jpg') }}" alt="slide-2">
-                <img class="slide-img d-md-none" src="{{ asset('User/assets/img/slide2.jpg') }}" alt="slide-2">
+                @if (isset($banner2->image) &&
+                        !empty($banner2->image && File::exists(public_path('storage/CmsImage/' . $banner2->image))))
+                    <img class="slide-img d-none d-md-block" src="{{ asset('storage/CmsImage/' . $banner2->image) }}"
+                        alt="slide-2">
+                    <img class="slide-img d-md-none" src="{{ asset('storage/CmsImage/' . $banner2->image) }}"
+                        alt="slide-2">
+                @else
+                    <img class="slide-img d-none d-md-block" src="{{ asset('User/assets/img/slide2.jpg') }}" alt="slide-2">
+                    <img class="slide-img d-md-none" src="{{ asset('User/assets/img/slide2.jpg') }}" alt="slide-2">
+                @endif
+
                 <div class="content-absolute content-slide">
                     <div class="container height-inherit d-flex align-items-center justify-content-center">
                         <div class="content-box slide-content slide-content-1 py-4 text-center">
                             <h2 class="slide-heading heading_72 animate__animated animate__fadeInUp"
                                 data-animation="animate__animated animate__fadeInUp">
-                                ART
+                                <a class="text-white" href="{{ $banner2->short_desc }}">{{ $banner2->title }}</a>
                             </h2>
-                            <p class="slide-subheading heading_24 animate__animated animate__fadeInUp"
+                            <div class="slide-subheading heading_24 animate__animated animate__fadeInUp"
                                 data-animation="animate__animated animate__fadeInUp">
-                                Gallery shows
-                            </p>
+                                <?php echo html_entity_decode($banner1->description); ?>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="slide-item slide-item-bag position-relative">
-                <img class="slide-img d-none d-md-block" src="{{ asset('User/assets/img/slide3.jpg') }}" alt="slide-3">
-                <img class="slide-img d-md-none" src="{{ asset('User/assets/img/slide3.jpg') }}" alt="slide-3">
+
+                @if (isset($banner3->image) &&
+                        !empty($banner3->image && File::exists(public_path('storage/CmsImage/' . $banner3->image))))
+                    <img class="slide-img d-none d-md-block" src="{{ asset('storage/CmsImage/' . $banner3->image) }}"
+                        alt="slide-2">
+                    <img class="slide-img d-md-none" src="{{ asset('storage/CmsImage/' . $banner3->image) }}"
+                        alt="slide-2">
+                @else
+                    <img class="slide-img d-none d-md-block" src="{{ asset('User/assets/img/slide3.jpg') }}"
+                        alt="slide-3">
+                    <img class="slide-img d-md-none" src="{{ asset('User/assets/img/slide3.jpg') }}" alt="slide-3">
+                @endif
                 <div class="content-absolute content-slide">
                     <div class="container height-inherit d-flex align-items-center justify-content-center">
                         <div class="content-box slide-content slide-content-1 py-4 text-center">
                             <h2 class="slide-heading heading_72 animate__animated animate__fadeInUp"
                                 data-animation="animate__animated animate__fadeInUp">
-                                ART
+                                <a class="text-white" href="{{ $banner3->short_desc }}">{{ $banner3->title }}</a>
+
                             </h2>
-                            <p class="slide-subheading heading_24 animate__animated animate__fadeInUp"
+                            <div class="slide-subheading heading_24 animate__animated animate__fadeInUp"
                                 data-animation="animate__animated animate__fadeInUp">
-                                Gallery shows
-                            </p>
+                                <?php echo html_entity_decode($banner3->description); ?>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,13 +116,21 @@
         </div>
         <div class="container" data-aos="fade-up">
             <ul class="collectionbox">
+                @foreach ($featuredProducts as $featuredProduct)
+                {{-- {{ dd() }} --}}
                 <li>
                     <a href="#" class="ht-box-icon">
+                        @if (isset($featuredProduct->artwork_images[0]))
+                        <img src=" {{ asset('storage/ArtworkImage/'. $featuredProduct->artwork_images[0]->image) }}">
+                        @else
                         <img src=" {{ asset('User/assets/img/featured2.jpg') }}">
-                        <h3>Flamingo Vibes</h3>
+                        @endif
+                        <h3>{{ $featuredProduct->title }}</h3>
                     </a>
                 </li>
-                <li>
+                @endforeach
+                
+                {{-- <li>
                     <a href="#" class="ht-box-icon">
                         <img src=" {{ asset('User/assets/img/featured5.jpg') }}">
                         <h3>Urban Scenes</h3>
@@ -115,6 +154,26 @@
                         <h3>Street-art</h3>
                     </a>
                 </li>
+                <li>
+                    <a href="#" class="ht-box-icon">
+                        <img src=" {{ asset('User/assets/img/featured3.jpg') }}">
+                        <h3>Street-art</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="ht-box-icon">
+                        <img src=" {{ asset('User/assets/img/featured3.jpg') }}">
+                        <h3>Street-art</h3>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="ht-box-icon">
+                        <img src=" {{ asset('User/assets/img/featured3.jpg') }}">
+                        <h3>Street-art</h3>
+                    </a>
+                </li> --}}
+
+
             </ul>
         </div>
     </div>
@@ -316,7 +375,7 @@
                     <div class="col-lg-4 col-md-6 col-12 aos-init aos-animate" data-aos="fade-up"
                         data-aos-duration="700">
                         <div class="article-card bg-transparent p-0 shadow-none">
-                            <a class="article-card-img-wrapper" href="article.html">
+                            <a class="article-card-img-wrapper" href="">
                                 <img src="{{ asset('User/assets/img/blog-img1.jpg') }}" alt="img"
                                     class="article-card-img rounded">
                                 <span class="article-tag article-tag-absolute rounded">Art Gallery</span>
@@ -336,7 +395,7 @@
                                 </span>
                             </p>
                             <h2 class="article-card-heading heading_18">
-                                <a class="heading_18" href="article.html">
+                                <a class="heading_18" href="">
                                     Discovering the Royal Academy Summer Exhibition
                                 </a>
                             </h2>
@@ -345,7 +404,7 @@
                     <div class="col-lg-4 col-md-6 col-12 aos-init aos-animate" data-aos="fade-up"
                         data-aos-duration="700">
                         <div class="article-card bg-transparent p-0 shadow-none">
-                            <a class="article-card-img-wrapper" href="article.html">
+                            <a class="article-card-img-wrapper" href="">
                                 <img src="{{ asset('User/assets/img/blog-img2.jpg') }}" alt="img"
                                     class="article-card-img rounded">
                                 <span class="article-tag article-tag-absolute rounded">Art Gallery</span>
@@ -365,7 +424,7 @@
                                 </span>
                             </p>
                             <h2 class="article-card-heading heading_18">
-                                <a class="heading_18" href="article.html">
+                                <a class="heading_18" href="">
                                     Discovering the Royal Academy Summer Exhibition
                                 </a>
                             </h2>
@@ -374,7 +433,7 @@
                     <div class="col-lg-4 col-md-6 col-12 aos-init aos-animate" data-aos="fade-up"
                         data-aos-duration="700">
                         <div class="article-card bg-transparent p-0 shadow-none">
-                            <a class="article-card-img-wrapper" href="article.html">
+                            <a class="article-card-img-wrapper" href="">
                                 <img src="{{ asset('User/assets/img/blog-img2.jpg') }}" alt="img"
                                     class="article-card-img rounded">
                                 <span class="article-tag article-tag-absolute rounded">Art Gallery</span>
@@ -394,7 +453,37 @@
                                 </span>
                             </p>
                             <h2 class="article-card-heading heading_18">
-                                <a class="heading_18" href="article.html">
+                                <a class="heading_18" href="">
+                                    Discovering the Royal Academy Summer Exhibition
+                                </a>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 aos-init aos-animate" data-aos="fade-up"
+                        data-aos-duration="700">
+                        <div class="article-card bg-transparent p-0 shadow-none">
+                            <a class="article-card-img-wrapper" href="">
+                                <img src="{{ asset('User/assets/img/blog-img2.jpg') }}" alt="img"
+                                    class="article-card-img rounded">
+                                <span class="article-tag article-tag-absolute rounded">Art Gallery</span>
+                            </a>
+                            <p class="article-card-published text_12 d-flex align-items-center">
+                                <span class="article-date d-flex align-items-center">
+                                    <span class="icon-publish">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </span>
+                                    <span class="ms-2">30 December, 2022</span>
+                                </span>
+                                <span class="article-author d-flex align-items-center ms-4">
+                                    <span class="icon-author">
+                                        <i class="far fa-user"></i>
+                                    </span>
+                                    <span class="ms-2">Lara Joe</span>
+                                </span>
+                            </p>
+                            <h2 class="article-card-heading heading_18">
+                                <a class="heading_18" href="">
                                     Discovering the Royal Academy Summer Exhibition
                                 </a>
                             </h2>

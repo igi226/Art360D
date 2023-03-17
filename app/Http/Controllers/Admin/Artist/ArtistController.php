@@ -17,22 +17,14 @@ class ArtistController extends Controller
     {
         $this->artist = $artist;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $data["artists"] = $this->artist->getAllArtists();
         return view("Admin.Artists.index", $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $data["subscription_plans"] = Subscription::where("user_type", "artist")->get();
@@ -40,12 +32,7 @@ class ArtistController extends Controller
         return view("Admin.Artists.create", $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(ArtistRequest $request)
     {
         // dd("ff");

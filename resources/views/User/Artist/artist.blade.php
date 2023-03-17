@@ -34,23 +34,9 @@
                 Sort By Artwork Category:
                 <select>
                     <option>Select</option>
-                    <option>Oil Painting </option>
-                    <option>Ink Painting </option>
-                    <option>Calligraphy </option>
-                    <option>Photography </option>
-                    <option>Pop Art </option>
-                    <option>Design </option>
-                    <option>Contemporary Art</option>
-                    <option>Post-War European Art</option>
-                    <option>Post-War American Art</option>
-                    <option>Street Art</option>
-                    <option>Prints & Multiples</option>
-                    <option>Abstract Art</option>
-                    <option>Sculpture</option>
-                    <option>Minimalism</option>
-                    <option>Geometric</option>
-                    <option>Drawing</option>
-                    <option>Works on Paper</option>
+                    @foreach ($categories as $category)
+                    <option>{{ $category->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -59,15 +45,18 @@
 <h3 class="text-center h4 fw-semibold mb-4">Artist Listing</h3>
 <div class="container">
     <div class="row">
+        @foreach ($artists as $artist)
+            
+       
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card artlist">
                 <div class="card-image">
                     <a href="#"><img src="{{ asset('User/assets/img/the-japanese-bridge-claude-monet.jpg') }}"></a>
                 </div>
                 <div class="card-body">
-                    <h2><a href="#">Claude Monet</a></h2>
-                    <p><i class="fas fa-map-marker-alt"></i> French 1840</p>
-                    <h4 class="artworkbadge">Artworks (0)</h4>
+                    <h2><a href="#">{{ $artist->first_name. ' '.  $artist->last_name }}</a></h2>
+                    <p><i class="fas fa-map-marker-alt"></i>{{ $artist->address }} </p>
+                    <h4 class="artworkbadge">Artworks ({{ $artist->total_artworks->count() }})</h4>
                     <ul class="optionlist">
                         <li>Buy Now (0)</li>
                         <li> Auction (0) </li>
@@ -80,7 +69,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-4">
+        @endforeach
+        {{-- <div class="col-lg-3 col-md-6 mb-4">
             <div class="card artlist">
                 <div class="card-image">
                     <a href="#"><img src="{{ asset('User/assets/img/392775917.jpg') }}"></a>
@@ -100,8 +90,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
+        </div> --}}
+        {{-- <div class="col-lg-3 col-md-6 mb-4">
             <div class="card artlist">
                 <div class="card-image">
                     <a href="#"><img src="{{ asset('User/assets/img/WeChat_Image_20210606082222.jpg') }}"></a>
@@ -184,7 +174,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
     

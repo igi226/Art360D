@@ -13,13 +13,10 @@ class AuthController extends Controller
     }
 
     public function login( Request $request ) {
-        // $validator = Validator::make($request->all(), [
-            $request->validate([
-                'email' => 'required|email',
-                'password' => 'required',
-            ]);
-            
-        // ]);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
         $data = $request->all();
         if(Auth::guard('admin')->attempt(["email" => $data["email"], "password" => $data["password"]])){
             return redirect()->route('admin.dashboard');

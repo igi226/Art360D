@@ -47,4 +47,9 @@ class User extends Authenticatable
         return $this->hasMany(SubscriptionTaken::class, 'artist_id', 'id');
 
     }
+
+    public function total_artworks(){
+        return $this->hasMany(Artwork::class, 'artist_id', 'id');
+
+    }
 }

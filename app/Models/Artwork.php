@@ -18,6 +18,10 @@ class Artwork extends Model
         return $this->hasMany(ArtworkImage::class, 'artwork_id', 'id');
     }
 
+    // public function artwork_categories(){
+    //     return $this->hasMany(ArtworkCategory::class, 'artwork_id', 'id');
+    // }
+
     public function artistUsers(){
         return $this->belongsTo(User::class, 'artist_id', 'id');
     }

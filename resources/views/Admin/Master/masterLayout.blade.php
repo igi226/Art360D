@@ -280,6 +280,17 @@
                                 <li><a href="{{ route('cms.create') }}">Add cms</a></li>
                             </ul>
                         </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="ri-layout-3-line"></i>
+                                <span>Blog management</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="true">
+                                <li><a href="{{ route('blogs.index') }}">List of blogs</a></li>
+                                <li><a href="{{ route('blogs.create') }}">Add blog</a></li>
+                            </ul>
+                        </li>
                         
 
                         

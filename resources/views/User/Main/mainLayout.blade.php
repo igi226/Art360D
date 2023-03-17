@@ -27,7 +27,6 @@
 
 <body>
     <div class="body-wrapper">
-        <!-- announcement bar start -->
         <div class="announcement-bar bg-1 py-1 py-lg-1">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
@@ -43,16 +42,33 @@
                     <div class="col-lg-6 ">
                         <div class="announcement-meta-wrapper d-flex align-items-center justify-content-end">
                             <div class="announcement-meta d-flex align-items-center">
-                                <a class="announcement-login announcement-text text-white" href="#">
-                                    <i class="far fa-user"></i>
-                                    <span>Login</span>
-                                </a>
+                                @guest
+                                    @if (Route::has('login'))
+                                        <a class="announcement-login announcement-text text-white"
+                                            href="{{ route('login') }}">
+                                            <i class="far fa-user"></i>
+                                            <span>Login</span>
+                                        </a>
+                                    @endif
+                                @else
+                                    <a class="announcement-login announcement-text text-white" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>Logout</span>
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                @endguest
                                 <span class="separator-login d-flex px-3">
                                     <svg width="2" height="9" viewBox="0 0 2 9" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.4" d="M1 0.5V8.5" stroke="#FEFEFE" stroke-linecap="round" />
                                     </svg>
                                 </span>
+
                                 <div class="currency-wrapper">
                                     <select>
                                         <option>Select</option>
@@ -104,7 +120,7 @@
                                     </li>
                                     <li class="menu-list-item nav-item has-dropdown active">
                                         <div class="mega-menu-header">
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="{{ route('user.artworks') }}">
                                                 Artworks
                                             </a>
                                         </div>
@@ -234,7 +250,8 @@
                                                             class="mega-menu-header d-flex align-items-center justify-content-between">
                                                             <a class="mega-menu-img nav-link-sub nav-text-sub"
                                                                 href="#">
-                                                                <img class="menu-img" src="{{ asset('User/assets/img/menu_image.png') }}"
+                                                                <img class="menu-img"
+                                                                    src="{{ asset('User/assets/img/menu_image.png') }}"
                                                                     alt="img">
                                                                 <div
                                                                     class="img-menu-action text_12 bg-transparent p-0 mt-2">
@@ -323,7 +340,7 @@
 
         <main id="MainContent" class="content-for-layout">
             <!-- slideshow start -->
-           @yield('content')
+            @yield('content')
         </main>
 
 

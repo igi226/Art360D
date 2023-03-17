@@ -9,6 +9,7 @@ interface ArtworkInterface {
     public function deleteArtwork( $slug );
     public function putOnOffMarket( $id );
     public function fearutedProduct( $id );
+    public function getfearutedProducts();
     
     public function deleteArtwork_image( $id );
 }

@@ -94,7 +94,7 @@ class ArtworkController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit($id) 
     {
         $data['artwork'] = $this->artworks->getArtwork($id);
         // dd($data['artwork']->artwork_frames);
