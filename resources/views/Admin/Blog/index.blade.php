@@ -53,7 +53,16 @@
                                                             class="btn btn-outline-primary btn-xs">
                                                             <i class="fas fa-eye" ></i>
                                                         </a>
-                                                        
+                                                        <form method="POST" action="{{ route('blogs.destroy', $blog->slug ) }}" class="action-icon">
+                                                            @csrf
+                                                            <input name="_method" type="hidden" value="DELETE">
+                                                            <button type="submit"
+                                                                class="btn btn-outline-danger btn-xs delete-icon show_confirm"
+                                                                data-toggle="tooltip" title='Delete'>
+
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
                                                   
                                                     </td>
                                                 </tr>

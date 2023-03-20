@@ -46,6 +46,10 @@ class BlogRepository implements BlogInterface {
         
         return $blog->update($data);
     }
+
+    public function deleteBlog($slug){
+        return Blog::where('slug', $slug)->firstOrFail()->delete();
+    }
 }
 
 ?>

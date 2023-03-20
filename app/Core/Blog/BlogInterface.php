@@ -6,5 +6,7 @@ interface BlogInterface {
     public function getAllBlogs();
     public function getBlog($slug);
     public function updateBlog(array $data, $slug);
+    public function deleteBlog($slug);
+
 }
 ?>

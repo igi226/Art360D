@@ -43,9 +43,10 @@ class BlogController extends Controller
     }
 
     
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $data['blog'] = $this->blog->getBlog($slug);
+        return view('Admin.Blog.view', $data);
     }
 
     
@@ -71,8 +72,12 @@ class BlogController extends Controller
     }
 
     
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+       if($this->blog->deleteBlog($slug)){
+        return back()->with('msg', 'Blog has been deleted successfully');
+       }else{
+        return back()->with('msg', 'Some error ocur');
+       }
     }
 }
