@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\UserArtist;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use illuminate\Support\Str;
 class ArtistRepository implements ArtistInterface {
 
     public function getAllArtists(){
@@ -16,7 +16,12 @@ class ArtistRepository implements ArtistInterface {
     }
 
     public function storeArtist($data, $data2, $subscriptions_id){
-        //  dd([$data, $data2]);
+        $slug = Str::slug($data['first_name']);
+        $slug_count = DB::table('users')->where('slug',$slug)->count();
+        if($slug_count>0){
+            $slug = $slug.'-'.sha1($slug);
+        }
+        $data['slug'] = $slug;
         $storeartist = User::create($data);
         
         $data2["user_id"] = $storeartist->id;

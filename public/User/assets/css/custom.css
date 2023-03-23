@@ -1,5 +1,6 @@
 body{
   top: 0 !important;
+  letter-spacing: 0;
 }
 .currency-wrapper select{
   width: 65px;
@@ -293,6 +294,7 @@ body{
   max-height: 200px;
   height: 200px;
   object-fit: contain;
+  margin: auto;
 }
 .artlist .card-body h2{
   font-size: 16px;
@@ -677,4 +679,33 @@ body{
   position: relative;
   top: 1px;
   margin-right: 4px;
+}
+.full-with-pic-smallthumb img{
+  height: 130px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+.exhibition-pnl h2{
+  margin: 0;
+  background: #ff1749;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px;
+}
+.sidefilter .card-title {
+    font-size: 15px;
+    font-weight: 500;
+}
+.card hr{
+  background: #9f9f9f;
+}
+.biocontent p{
+  text-align: justify;
+  font-size: 13.5px;
+}
+.proinfotext li{
+  line-height: 1.6;
+  margin-bottom: 5px;
 }
