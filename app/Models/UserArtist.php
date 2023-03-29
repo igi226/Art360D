@@ -12,4 +12,8 @@ class UserArtist extends Model
     public function type_artist(){
         return $this->belongsTo(ArtistType::class, 'artist_type', 'id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

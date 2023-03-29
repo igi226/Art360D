@@ -12,7 +12,9 @@ interface ArtistInterface {
     public function getSpecificArtistType($id);
     public function getAllArtistsTypes();
     public function deleteArtistTypes($id);
+    public function followUnfollow($artist_id) ;
+    public function getFeaturedArtist();
+    public function getCategoryArtist($artist_type_id);
 
-
-
+    
 }

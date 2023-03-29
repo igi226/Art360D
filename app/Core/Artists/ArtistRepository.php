@@ -79,7 +79,7 @@ class ArtistRepository implements ArtistInterface {
     }
 
     public function getSpecificArtist($id){
-        return User::findOrFail($id);
+        return User::with('total_artworks')->findOrFail($id);
     }
 
     public function storeArtistType($data){
@@ -101,6 +101,30 @@ class ArtistRepository implements ArtistInterface {
     public function deleteArtistTypes($id){
         return ArtistType::findOrFail($id)->delete();
         
+    }
+
+    public function followUnfollow($artist_id) {
+        $data = DB::table('artist_follows');
+        $check = $data->where('artist_id', $artist_id)->where('user_id', auth()->id())->first();
+        if($check){
+             $data->delete();
+             return 'Follow';
+        }else{
+             $data->insert([
+                'artist_id' => $artist_id,
+                'user_id' => auth()->id(),
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+            return 'Following';
+        }
+    }
+
+    public function getFeaturedArtist(){
+        return UserArtist::where('fearured_artist', 1)->with('user')->get();
+    }
+
+    public function getCategoryArtist($artist_type_id){
+        return UserArtist::where('artist_type', $artist_type_id)->with('user')->get();
     }
 
 

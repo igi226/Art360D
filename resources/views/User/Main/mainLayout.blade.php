@@ -739,6 +739,7 @@
     </div>
 
     @yield('artistPageScript')
+    @yield('artworkScript')
 </body>
 
 </html>
