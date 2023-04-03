@@ -61,6 +61,9 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+                                    <a href="{{ route('user.artist.Profile') }}"><span style="margin-left: 22%;">Profile</span></a>
+
                                 @endguest
                                 <span class="separator-login d-flex px-3">
                                     <svg width="2" height="9" viewBox="0 0 2 9" fill="none"

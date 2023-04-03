@@ -7,17 +7,21 @@
                 <div class="categoryboxlist mb-4">
                     <div class="owl-carousel owl-theme" id="categorybox">
                         @foreach ($artworkCategories as $category)
-                            @if (isset($category->image) && !empty($category->image && File::exists(public_path('storage/categoryImage/' . $category->image))))
-                                <div class="item" style="background-image: url({{ asset('storage/categoryImage/' . $category->image) }});">
-                            @else
-                                <div class="item" style="background-image: url({{ asset('User/assets/img/cat1.jpg') }});">
+                            @if (isset($category->image) &&
+                                    !empty($category->image && File::exists(public_path('storage/categoryImage/' . $category->image))))
+                                <div class="item"
+                                    style="background-image: url({{ asset('storage/categoryImage/' . $category->image) }});">
+                                @else
+                                    <div class="item"
+                                        style="background-image: url({{ asset('User/assets/img/cat1.jpg') }});">
                             @endif
-                            <a href="#" class="categoryboxtitle">
+                            <a href="javascript:void(0)" onclick="categoryWiseArtwork({{ $category->id }})"
+                                class="categoryboxtitle">
                                 <h2>{{ $category->name }} </h2>
                             </a>
                     </div>
                     @endforeach
-                   
+
                 </div>
             </div>
             <div class="filter-pnl">
@@ -38,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="main-section">
                 @foreach ($artworks as $artwork)
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card artlist">
@@ -81,162 +85,10 @@
                         </div>
                     </div>
                 @endforeach
-                {{-- <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card artlist">
-                        <div class="card-image">
-                            <a href="#"><img src="{{ asset('User/assets/img/cat3.jpg') }}"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <a href="#" class="likebtn"><i class="far fa-thumbs-up"></i> Like</a>
-                                <a href="#" class="likebtn"><i class="fas fa-plus-circle"></i> Save(0)</a>
-                            </div>
-                            <h2><a href="#">Claude Monet</a></h2>
-                            <p>By Baochun Huang</p>
-                            <h4 class="artworkbadge">Calligraphy</h4>
-                            <ul class="optionlist">
-                                <li>27 "(H) x 17.5 "(W) x 0.5 "(D)</li>
-                            </ul>
-                            <div class="d-flex justify-content-between fw-semibold">
-                                <p>Price : $5000</p>
-                            </div>
-                            <div class="d-flex justify-content-between mt-1">
-                                <a href="#" class="btn btn-theme btn-sm">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
+
+                <div id="category-wise">
+
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card artlist">
-                        <div class="card-image">
-                            <a href="#"><img src="{{ asset('User/assets/img/392775917.jpg') }}"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <a href="#" class="likebtn"><i class="far fa-thumbs-up"></i> Like</a>
-                                <a href="#" class="likebtn"><i class="fas fa-plus-circle"></i> Save(0)</a>
-                            </div>
-                            <h2><a href="#">Claude Monet</a></h2>
-                            <p>By Baochun Huang</p>
-                            <h4 class="artworkbadge">Calligraphy</h4>
-                            <ul class="optionlist">
-                                <li>27 "(H) x 17.5 "(W) x 0.5 "(D)</li>
-                            </ul>
-                            <div class="d-flex justify-content-between fw-semibold">
-                                <p>Price : $5000</p>
-                            </div>
-                            <div class="d-flex justify-content-between mt-1">
-                                <a href="#" class="btn btn-theme btn-sm">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card artlist">
-                        <div class="card-image">
-                            <a href="#"><img src="{{ asset('User/assets/img/featured3.jpg') }}"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <a href="#" class="likebtn"><i class="far fa-thumbs-up"></i> Like</a>
-                                <a href="#" class="likebtn"><i class="fas fa-plus-circle"></i> Save(0)</a>
-                            </div>
-                            <h2><a href="#">Claude Monet</a></h2>
-                            <p>By Baochun Huang</p>
-                            <h4 class="artworkbadge">Calligraphy</h4>
-                            <ul class="optionlist">
-                                <li>27 "(H) x 17.5 "(W) x 0.5 "(D)</li>
-                            </ul>
-                            <div class="d-flex justify-content-between fw-semibold">
-                                <p>Price : $5000</p>
-                            </div>
-                            <div class="d-flex justify-content-between mt-1">
-                                <a href="#" class="btn btn-theme btn-sm">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card artlist">
-                        <div class="card-image">
-                            <a href="#"><img src="{{ asset('User/assets/img/featured4.jpg') }}"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <a href="#" class="likebtn"><i class="far fa-thumbs-up"></i> Like</a>
-                                <a href="#" class="likebtn"><i class="fas fa-plus-circle"></i> Save(0)</a>
-                            </div>
-                            <h2><a href="#">Claude Monet</a></h2>
-                            <p>By Baochun Huang</p>
-                            <h4 class="artworkbadge">Calligraphy</h4>
-                            <ul class="optionlist">
-                                <li>27 "(H) x 17.5 "(W) x 0.5 "(D)</li>
-                            </ul>
-                            <div class="d-flex justify-content-between fw-semibold">
-                                <p>Price : $5000</p>
-                                <p>$200/month</p>
-                            </div>
-                            <div class="d-flex justify-content-between mt-1">
-                                <a href="#" class="btn btn-theme btn-sm">Buy Now</a>
-                                 <a href="#" class="btn btn-theme btn-sm">Rent Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card artlist">
-                        <div class="card-image">
-                            <a href="#"><img src="{{ asset('User/assets/img/category1.jpg') }}"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <a href="#" class="likebtn"><i class="far fa-thumbs-up"></i> Like</a>
-                                <a href="#" class="likebtn"><i class="fas fa-plus-circle"></i> Save(0)</a>
-                            </div>
-                            <h2><a href="#">Claude Monet</a></h2>
-                            <p>By Baochun Huang</p>
-                            <h4 class="artworkbadge">Calligraphy</h4>
-                            <ul class="optionlist">
-                                <li>27 "(H) x 17.5 "(W) x 0.5 "(D)</li>
-                            </ul>
-                            <div class="d-flex justify-content-between fw-semibold">
-                                <p>Price : $5000</p>
-                                <p>$200/month</p>
-                            </div>
-                            <div class="d-flex justify-content-between mt-1">
-                                <a href="#" class="btn btn-theme btn-sm">Buy Now</a>
-                                 <a href="#" class="btn btn-theme btn-sm">Rent Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card artlist">
-                        <div class="card-image">
-                            <a href="#"><img src="{{ asset('User/assets/img/category1.jpg') }}"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-2">
-                                <a href="#" class="likebtn"><i class="far fa-thumbs-up"></i> Like</a>
-                                <a href="#" class="likebtn"><i class="fas fa-plus-circle"></i> Save(0)</a>
-                            </div>
-                            <h2><a href="#">Claude Monet</a></h2>
-                            <p>By Baochun Huang</p>
-                            <h4 class="artworkbadge">Calligraphy</h4>
-                            <ul class="optionlist">
-                                <li>27 "(H) x 17.5 "(W) x 0.5 "(D)</li>
-                            </ul>
-                            <div class="d-flex justify-content-between fw-semibold">
-                                <p>Price : $5000</p>
-                                <p>$200/month</p>
-                            </div>
-                            <div class="d-flex justify-content-between mt-1">
-                                <a href="#" class="btn btn-theme btn-sm">Buy Now</a>
-                                 <a href="#" class="btn btn-theme btn-sm">Rent Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
         <div class="col-lg-3 order-lg-1 sidefilter">
@@ -246,10 +98,10 @@
                     <div class="range-slider" id="rangeslide1">
                         <div class="chooserange d-flex pb-3 justify-content-between">
                             <div>
-                                $ <input type="number" value="0" min="0" max="1000" />
+                                $ <input type="number" value="0" min="0" max="10000" />
                             </div>
                             <div>
-                                $ <input type="number" value="1000" min="0" max="1000" />
+                                $ <input type="number" value="10000" min="0" max="10000" />
                             </div>
                         </div>
                         <div>
@@ -265,9 +117,9 @@
                     <div class="checklist-cat">
                         <div class="listchk"><label><input type="checkbox"> All</label></div>
                         @foreach ($artworkCategories as $categoryFilter)
-                        <div class="listchk"><label><input type="checkbox"> {{ $categoryFilter->name }}</label></div>
+                            <div class="listchk"><label><input type="checkbox"> {{ $categoryFilter->name }}</label></div>
                         @endforeach
-                        
+
                     </div>
                 </div>
             </div>
@@ -315,19 +167,10 @@
                     <div class="checklist-cat">
                         <div class="listchk"><label><input type="checkbox"> All</label></div>
                         @foreach ($artworks as $artwork_year)
-                        <div class="listchk"><label><input type="checkbox"> {{ date('Y', strtotime($artwork_year->year_created)) }}</label></div>
-                            
+                            <div class="listchk"><label><input type="checkbox">
+                                    {{ date('Y', strtotime($artwork_year->year_created)) }}</label></div>
                         @endforeach
-                        {{-- <div class="listchk"><label><input type="checkbox"> 2014</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2015</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2016</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2017</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2018</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2019</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2020</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2021</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2022</label></div>
-                        <div class="listchk"><label><input type="checkbox"> 2023</label></div> --}}
+                     
                     </div>
                 </div>
             </div>
@@ -351,131 +194,147 @@
 @endsection
 
 @section('artworkScript')
-<script type="text/javascript">
-    (function() {
-
-      var parent = document.querySelector("#rangeslide1");
-      if(!parent) return;
-
-      var
-        rangeS = parent.querySelectorAll("input[type=range]"),
-        numberS = parent.querySelectorAll("input[type=number]");
-
-      rangeS.forEach(function(el) {
-        el.oninput = function() {
-          var slide1 = parseFloat(rangeS[0].value),
-                slide2 = parseFloat(rangeS[1].value);
-
-          if (slide1 > slide2) {
-                    [slide1, slide2] = [slide2, slide1];
-           }
-
-          numberS[0].value = slide1;
-          numberS[1].value = slide2;
-        }
-      });
-
-      numberS.forEach(function(el) {
-        el.oninput = function() {
-                var number1 = parseFloat(numberS[0].value),
-                        number2 = parseFloat(numberS[1].value);
+    <script type="text/javascript">
+        function categoryWiseArtwork(category_id) {
+            $.ajax({
+            type: "GET",
+            url: "{{ route('user.categoryWiseArtwork') }}",
+            data: {
+                'category_id': category_id,
+                '_token': '{{ csrf_token() }}'
+            },
+            dataType: "html",
+            success: function(response) {
                 
-          if (number1 > number2) {
-            var tmp = number1;
-            numberS[0].value = number2;
-            numberS[1].value = tmp;
-          }
-
-          rangeS[0].value = number1;
-          rangeS[1].value = number2;
-
+            }
+           
+        });
         }
-      });
 
-    })();
+        (function() {
 
-    (function() {
+            var parent = document.querySelector("#rangeslide1");
+            if (!parent) return;
 
-      var parent = document.querySelector("#rangeslide2");
-      if(!parent) return;
+            var
+                rangeS = parent.querySelectorAll("input[type=range]"),
+                numberS = parent.querySelectorAll("input[type=number]");
 
-      var
-        rangeS = parent.querySelectorAll("input[type=range]"),
-        numberS = parent.querySelectorAll("input[type=number]");
+            rangeS.forEach(function(el) {
+                el.oninput = function() {
+                    var slide1 = parseFloat(rangeS[0].value),
+                        slide2 = parseFloat(rangeS[1].value);
 
-      rangeS.forEach(function(el) {
-        el.oninput = function() {
-          var slide1 = parseFloat(rangeS[0].value),
-                slide2 = parseFloat(rangeS[1].value);
+                    if (slide1 > slide2) {
+                        [slide1, slide2] = [slide2, slide1];
+                    }
 
-          if (slide1 > slide2) {
-                    [slide1, slide2] = [slide2, slide1];
-           }
+                    numberS[0].value = slide1;
+                    numberS[1].value = slide2;
+                }
+            });
 
-          numberS[0].value = slide1;
-          numberS[1].value = slide2;
-        }
-      });
-
-      numberS.forEach(function(el) {
-        el.oninput = function() {
-                var number1 = parseFloat(numberS[0].value),
+            numberS.forEach(function(el) {
+                el.oninput = function() {
+                    var number1 = parseFloat(numberS[0].value),
                         number2 = parseFloat(numberS[1].value);
-                
-          if (number1 > number2) {
-            var tmp = number1;
-            numberS[0].value = number2;
-            numberS[1].value = tmp;
-          }
 
-          rangeS[0].value = number1;
-          rangeS[1].value = number2;
+                    if (number1 > number2) {
+                        var tmp = number1;
+                        numberS[0].value = number2;
+                        numberS[1].value = tmp;
+                    }
 
-        }
-      });
+                    rangeS[0].value = number1;
+                    rangeS[1].value = number2;
 
-    })();
+                }
+            });
 
-    (function() {
+        })();
 
-      var parent = document.querySelector("#rangeslide3");
-      if(!parent) return;
+        (function() {
 
-      var
-        rangeS = parent.querySelectorAll("input[type=range]"),
-        numberS = parent.querySelectorAll("input[type=number]");
+            var parent = document.querySelector("#rangeslide2");
+            if (!parent) return;
 
-      rangeS.forEach(function(el) {
-        el.oninput = function() {
-          var slide1 = parseFloat(rangeS[0].value),
-                slide2 = parseFloat(rangeS[1].value);
+            var
+                rangeS = parent.querySelectorAll("input[type=range]"),
+                numberS = parent.querySelectorAll("input[type=number]");
 
-          if (slide1 > slide2) {
-                    [slide1, slide2] = [slide2, slide1];
-           }
+            rangeS.forEach(function(el) {
+                el.oninput = function() {
+                    var slide1 = parseFloat(rangeS[0].value),
+                        slide2 = parseFloat(rangeS[1].value);
 
-          numberS[0].value = slide1;
-          numberS[1].value = slide2;
-        }
-      });
+                    if (slide1 > slide2) {
+                        [slide1, slide2] = [slide2, slide1];
+                    }
 
-      numberS.forEach(function(el) {
-        el.oninput = function() {
-                var number1 = parseFloat(numberS[0].value),
+                    numberS[0].value = slide1;
+                    numberS[1].value = slide2;
+                }
+            });
+
+            numberS.forEach(function(el) {
+                el.oninput = function() {
+                    var number1 = parseFloat(numberS[0].value),
                         number2 = parseFloat(numberS[1].value);
-                
-          if (number1 > number2) {
-            var tmp = number1;
-            numberS[0].value = number2;
-            numberS[1].value = tmp;
-          }
 
-          rangeS[0].value = number1;
-          rangeS[1].value = number2;
+                    if (number1 > number2) {
+                        var tmp = number1;
+                        numberS[0].value = number2;
+                        numberS[1].value = tmp;
+                    }
 
-        }
-      });
+                    rangeS[0].value = number1;
+                    rangeS[1].value = number2;
 
-    })();
-</script>
+                }
+            });
+
+        })();
+
+        (function() {
+
+            var parent = document.querySelector("#rangeslide3");
+            if (!parent) return;
+
+            var
+                rangeS = parent.querySelectorAll("input[type=range]"),
+                numberS = parent.querySelectorAll("input[type=number]");
+
+            rangeS.forEach(function(el) {
+                el.oninput = function() {
+                    var slide1 = parseFloat(rangeS[0].value),
+                        slide2 = parseFloat(rangeS[1].value);
+
+                    if (slide1 > slide2) {
+                        [slide1, slide2] = [slide2, slide1];
+                    }
+
+                    numberS[0].value = slide1;
+                    numberS[1].value = slide2;
+                }
+            });
+
+            numberS.forEach(function(el) {
+                el.oninput = function() {
+                    var number1 = parseFloat(numberS[0].value),
+                        number2 = parseFloat(numberS[1].value);
+
+                    if (number1 > number2) {
+                        var tmp = number1;
+                        numberS[0].value = number2;
+                        numberS[1].value = tmp;
+                    }
+
+                    rangeS[0].value = number1;
+                    rangeS[1].value = number2;
+
+                }
+            });
+
+        })();
+    </script>
 @endsection

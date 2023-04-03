@@ -218,6 +218,10 @@ class ArtistController extends Controller
 
         return $html;
     }
+
+    public function artistProfile() {
+        return view('User.Dashboard.profile');
+    }
 }
 
 ?>

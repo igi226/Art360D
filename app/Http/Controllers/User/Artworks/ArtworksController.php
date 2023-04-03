@@ -21,4 +21,10 @@ class ArtworksController extends Controller
         $data['artworkCategories'] = $this->artworkCategory->getAllCategory();
         return view('User.Artwork.artwork', $data);
     }
+
+
+    public function categoryWiseArtwork(Request $request) {
+        $data= $request->all();
+        $this->artwork->categoryWiseArtworkList($request->category_id);
+    }
 }

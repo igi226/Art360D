@@ -107,6 +107,11 @@ class ArtworkRepository implements ArtworkInterface {
     public function getfearutedProducts() {
         return Artwork::where('featured', 1)->get();
     }
+    
+    public function categoryWiseArtworkList($category_id){
+        $artworks = Artwork::select('category_ids')->get();
+        dd(implode(',',$artworks));                                       
+    }
 
     
 }
