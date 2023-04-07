@@ -20,6 +20,44 @@
     $('.search-wrapper').toggleClass('search-appear');
   });
 
+
+$('.payment_option h3').on('click', function () {
+    // console.log(this)
+    $(this).parent().find('.payment_inner').toggle('');
+});
+
+// const plus = document.querySelector('.plus_minus'),
+//   minus = document.querySelector('.minus_plus');
+
+// let number_el = document.getElementById('person_num');
+// number_el.innerText= 1;
+
+// plus.addEventListener('click', () => {
+//   let val = parseInt(number_el.innerText);
+//   if(val >= 12 ){
+//     return;
+//   }else{
+//     number_el.innerText = ++val;
+//   }
+  
+// });
+
+// minus.addEventListener('click', () => {
+//   let val = parseInt(number_el.innerText);
+//   if(val <= 1){
+//     return;
+//   }else{
+//     number_el.innerText = --val;
+    
+//   }
+  
+  
+// });
+
+  // $(".payment_option h3").click(function(){
+  //   $(".payment_inner").toggle();
+  // });
+
   // quickview slider initiation
   $('#quickview-modal').on('shown.bs.modal', function (e) {
     $('.qv-large-slider').slick('setPosition');
@@ -262,4 +300,128 @@ $('#categorybox').owlCarousel({
         }
     }
 });
+
+$(".gallerytop").owlCarousel({
+    items:1,
+    itemsDesktop: [1024, 1],
+    itemsDesktopSmall: [900, 1],
+    itemsTablet: [600, 1],
+    itemsMobile: [320, 1],
+    navigation: true,
+    slideSpeed: 500,
+    pagination: !1,
+    nav:true
+  });
+
+// $(".gallery_slider1").owlCarousel({
+//             items: 4,
+//             itemsDesktop: [1024, 4],
+//             itemsDesktopSmall: [900, 3],
+//             itemsTablet: [600, 1],
+//             itemsMobile: [320, 1],
+//             navigation: !0,
+//             navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+//             slideSpeed: 500,
+//             pagination: !1
+//         })
+$('.gallery_slider1').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                  360: {
+                    items: 1,
+                    nav: false
+                  },
+                  480: {
+                    items: 1,
+                    nav: false
+                  },
+                  600: {
+                    items: 2,
+                    nav: false
+                  },
+                  1000: {
+                    items: 4,
+                    nav: false,
+                    loop: false,
+                    margin: 20
+                  }
+                }
+              });
+$('.gallery_slider2').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                  360: {
+                    items: 1,
+                    nav: false
+                  },
+                  480: {
+                    items: 1,
+                    nav: false
+                  },
+                  600: {
+                    items: 2,
+                    nav: false
+                  },
+                  1000: {
+                    items: 4,
+                    nav: false,
+                    loop: false,
+                    margin: 20
+                  }
+                }
+              });
+$('.gallery_slider3').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                  360: {
+                    items: 1,
+                    nav: false
+                  },
+                  480: {
+                    items: 1,
+                    nav: false
+                  },
+                  600: {
+                    items: 2,
+                    nav: false
+                  },
+                  1000: {
+                    items: 4,
+                    nav: false,
+                    loop: false,
+                    margin: 20
+                  }
+                }
+              });
+$('.gallery_slider4').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                  360: {
+                    items: 1,
+                    nav: false
+                  },
+                  480: {
+                    items: 1,
+                    nav: false
+                  },
+                  600: {
+                    items: 2,
+                    nav: false
+                  },
+                  1000: {
+                    items: 4,
+                    nav: false,
+                    loop: false,
+                    margin: 20
+                  }
+                }
+              });
 })(jQuery);

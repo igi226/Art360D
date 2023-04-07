@@ -23,6 +23,12 @@
 	}
 }
 @media(max-width:767px){
+	.gallery_details {
+    padding: 50px 0;
+}
+	.contact_right{
+		margin: 20px 0 0 0;
+	}
 	.collectionbox{
 		display: block;
 		text-align: center;

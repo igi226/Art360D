@@ -94,7 +94,7 @@ class ArtistController extends Controller
         if($this->artist->updateArtist($data, $data2, $subscriptions_id, $id)){
             return redirect()->route("artists.index")->with("msg", "Profile updated successfully");
         }else{
-            return back()->with("msg", "Somev error occur!");
+            return back()->with("msg", "Some error occur!");
         }
     }
 

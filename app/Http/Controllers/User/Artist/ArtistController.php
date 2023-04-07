@@ -10,12 +10,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class ArtistController extends Controller
 {
     private $artist;
 
-    public function __construct(ArtistInterface $artist)
+    public function __construct(ArtistInterface $artist,)
     {
         $this->artist = $artist;
     }
@@ -220,7 +221,33 @@ class ArtistController extends Controller
     }
 
     public function artistProfile() {
-        return view('User.Dashboard.profile');
+        $data['artist_types'] = $this->artist->getAllArtistsTypes()->get();
+  
+        return view('User.Dashboard.profile', $data);
+    }
+
+    public function updateArtistProfile( Request $request ) {
+        $request->validate([
+            "first_name" => "required|string",
+            "last_name" => "required|string",
+            "company_name" => "required|string",
+            "email" => "required|email",
+            "artist_type" => "required|string",
+            "phone" => "required",
+        ]);
+        $data = $request->except("_token",  "_method", "artist_type", "feature_artist", "password", "confirm_password", "subscription_id","condition_report", "history_and_Provenance", "shipping_information", "payment_and_return_policies");
+        if(!empty($request->password)){
+            $data["password"] = Hash::make($request->password);
+        }
+       
+        $data2 = $request->only("artist_type","condition_report", "history_and_Provenance", "shipping_information", "payment_and_return_policies");
+        $subscriptions_id = null;
+        
+        if($this->artist->updateArtist($data, $data2, $subscriptions_id, auth()->id())){
+            return back()->with("msg", "Profile updated successfully");
+        }else{
+            return back()->with("msg", "Some error occur!");
+        }
     }
 }
 

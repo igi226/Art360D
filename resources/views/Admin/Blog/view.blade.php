@@ -21,9 +21,7 @@
                             
 
                             <h6 class="h5 text-primary">Description:</h6>
-                            <p><?php echo html_entity_decode(
-                                $blog->description
-                            ); ?></p>
+                            <p><?php echo html_entity_decode( $blog->description ); ?></p>
 
 
                         </div>

@@ -20,6 +20,10 @@ Route::post('/artists/like', [ArtistController::class, 'artistLike'])->name('use
 Route::post('/artists/follow', [ArtistController::class, 'artistFollow'])->name('user.artistFollow');
 Route::get('/artist-details/{slug}', [ArtistController::class, 'artistDetails'])->name('user.artistDetails');
 Route::get('/dashboard-artist', [ArtistController::class, 'artistProfile'])->name('user.artist.Profile');
+Route::post('/update-artist', [ArtistController::class, 'updateArtistProfile'])->name('user.updateArtist.Profile');
+
+Route::get('/artworks-details/{slug}', [ArtworksController::class, 'artworksDetails'])->name('user.artworksDetails');
+
 
 });
 

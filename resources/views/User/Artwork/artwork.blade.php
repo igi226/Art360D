@@ -47,7 +47,7 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card artlist">
                             <div class="card-image">
-                                <a href="#"><img
+                                <a href="{{ route('user.artworksDetails', $artwork->id) }}"><img
                                         src="{{ asset('User/assets/img/the-japanese-bridge-claude-monet.jpg') }}"></a>
                             </div>
                             <div class="card-body">

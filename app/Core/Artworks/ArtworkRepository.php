@@ -52,6 +52,8 @@ class ArtworkRepository implements ArtworkInterface {
     public function getArtwork( $id ){
       return Artwork::findOrFail($id);  
     }
+
+  
     public function updateArtwork( array $data,  $data2, $dataImage, $id ){
         Artwork::where('id', $id)->update($data);
         if(!empty($data2)){
