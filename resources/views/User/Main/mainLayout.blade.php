@@ -130,7 +130,7 @@
                                     </li>
                                     <li class="menu-list-item nav-item has-dropdown active">
                                         <div class="mega-menu-header">
-                                            <a class="nav-link" href="#">
+                                            <a class="nav-link" href="{{ route('user.gallery') }}">
                                                 Gallery
                                             </a>
                                         </div>
@@ -504,7 +504,7 @@
                             </li>
                             <li class="menu-list-item nav-item has-dropdown active">
                                 <div class="mega-menu-header">
-                                    <a class="nav-link " href="index.html">
+                                    <a class="nav-link " href="{{ route('user.gallery') }}">
                                         Gallery
                                     </a>
                                 </div>
@@ -743,6 +743,7 @@
 
     @yield('artistPageScript')
     @yield('artworkScript')
+    @yield('cartScript')
 </body>
 
 </html>

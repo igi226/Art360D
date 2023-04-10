@@ -106,8 +106,8 @@
                         <form class="product-form" action="#">
 
                             <div class="buy-it-now-btn mt-2">
-                                <button type="submit" class="position-relative btn-atc btn-buyit-now w-auto">BUY
-                                    IT NOW</button>
+                                <a href="{{ route('user.myCart') }}" class="position-relative btn-atc btn-buyit-now w-auto">BUY
+                                    IT NOW</a>
                             </div>
                         </form>
 

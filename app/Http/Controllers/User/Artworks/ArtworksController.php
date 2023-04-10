@@ -32,6 +32,21 @@ class ArtworksController extends Controller
         $data['artwork'] = $this->artwork->getArtwork($id);
         $data['artworks'] = $this->artwork->getAllArtworks();
         return view('User.Artwork.artworkDetails', $data);
+    }
 
+    public function myCart() {
+        return view('User.Cart&Checkout.cart');
+    }
+
+    public function checkout() {
+        return view('User.Cart&Checkout.checkout');
+    }
+
+    public function payment() {
+        return view('User.Cart&Checkout.payment');
+    }
+
+    public function paymentResult() {
+        return view('User.Cart&Checkout.paymentResult');
     }
 }

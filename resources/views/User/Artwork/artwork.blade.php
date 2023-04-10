@@ -78,7 +78,7 @@
                                     <p>${{ $artwork->rent_price_per_one_month }}/month</p>
                                 </div>
                                 <div class="d-flex justify-content-between mt-1">
-                                    <a href="#" class="btn btn-theme btn-sm">Buy Now</a>
+                                    <a href="{{ route('user.myCart') }}" class="btn btn-theme btn-sm">Buy Now</a>
                                     <a href="#" class="btn btn-theme btn-sm">Rent Now</a>
                                 </div>
                             </div>
